@@ -7,7 +7,7 @@ const app = express();
 app.get('/ussd', (request, response) => {
     //Make sure msidn is pressent, and session id is pressent
     let msisdn = request.query.msisdn;
-    let sessionId = request.query.sessionId;
+    let sessionId = request.query.sessionid;
     let input = request.query.input || '';
 
     if(!msisdn || !sessionId){
