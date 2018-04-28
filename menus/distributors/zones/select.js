@@ -16,7 +16,7 @@ module.exports = {
             let option = parseInt(this.input);
             if(typeof option == 'number' && options[option - 1] !== undefined){
                 this.data.zone = options[option - 1];
-                this.forward('zones/index');
+                this.forward('distributors/zones/index');
             } else {
                 this.sendMenu(options, 'You have entered an invalid option!');
             }
