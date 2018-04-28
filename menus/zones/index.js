@@ -4,7 +4,7 @@ module.exports = {
         let options = [
             'Find distributor contacts',
             'Report counterfeit',
-            'Confirm PICS recommended price'
+            'PICS recommended price'
         ];
 
         if(this.input === null){
