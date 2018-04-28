@@ -21,7 +21,7 @@ module.exports = {
             break;
 
             case '3':
-            this.forward('consumer');
+            this.forward('consumers/zones/select');
             break;
 
             default:
