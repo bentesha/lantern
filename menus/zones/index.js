@@ -22,7 +22,7 @@ module.exports = {
             break;
 
             case '3':
-            this.send('Thank you for using PICS! 5,000 is the recommended retail price!', true);
+            this.send('Thank you for using PICS!\n5,000 is the recommended retail price!', true);
             break;
 
             default:
