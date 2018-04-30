@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const manager = require('./services/session-manager');
 const MenuContext = require('./core/menu-context');
@@ -10,7 +12,7 @@ app.get('/ussd', (request, response) => {
     let sessionId = request.query.sessionid;
     let input = request.query.input || '';
 
-    if(!msisdn || !sessionId){
+    if (!msisdn || !sessionId) {
         response.set({session: 'Q'}); //Drop this session
         response.send("Sorry, there was a problem processing your request. Please retry!");
         return;
@@ -18,12 +20,12 @@ app.get('/ussd', (request, response) => {
 
     //Restore state
     manager.getState(sessionId, (error, state) => {
-        if(error){
+        if (error) {
             response.set({session: 'Q'}); //Drop this session
             response.send("There seems to be a problem with the server. Please retry again later!");
         } else {
             let isNewSession = false;
-            if(!state){
+            if (!state) {
                 state = {
                     menu: 'default',
                     data: {}
@@ -40,7 +42,7 @@ app.get('/ussd', (request, response) => {
             state.data = context.data;
             state.menu = context.currentMenu;
             manager.saveState(sessionId, state);
-            response.set({ session: context.quit ? 'Q' : 'C'});
+            response.set({session: context.quit ? 'Q' : 'C'});
             response.send(responseMessage);
         }
     });
