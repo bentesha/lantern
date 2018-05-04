@@ -2,12 +2,12 @@
 module.exports = {
     main(){
         let options = [
-            'Coastal Zone',
-            'Northen Zone',
-            'Lake Zone',
-            'Central Zone',
-            'Southern Highlands Zone',
-            'Southern Zone'
+            'Kanda ya Pwani',
+            'Kanda ya Kaskazini',
+            'Kanda ya Ziwa',
+            'Kanda ya Kati',
+            'Kanda ya Juu Kusini',
+            'Kanda ya Kusini'
         ];
 
         if(this.input == null){

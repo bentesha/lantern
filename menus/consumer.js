@@ -1,6 +1,6 @@
 
 module.exports = {
     main(){
-        this.send('Ups! This menu has not been implented yet!', true);
+        this.send('Samahani! Sehemu hii haijfanyi kazi bado!', true);
     }
 }

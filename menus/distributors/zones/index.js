@@ -2,31 +2,35 @@
 module.exports = {
     main(){
         let options = [
-            'Find distributor contacts',
-            'Report counterfeit',
-            'PICS recommended price'
+            'Tafuta Mawasiliano ya Wasambazaji',
+            'Taarifa Kuhusu Bidhaa Bandia',
+            'Thibitisha Bei Halali ya PICS'
         ];
 
         if(this.input === null){
-            this.sendMenu(options, 'Welcome to PICS - ' + this.data.zone);
+            this.sendMenu(options, 'Karibu PICS - ' + this.data.zone);
             return;
         }
 
         switch(this.input){
             case '1':
-            this.send('There are currently no distributors registered for this zone! Please check us back soon!', true);
+            let msg = 'Samahani! Hakuna wakala aliyesajiliwa kwa ukanda huu.';
+            if(this.data.zone === 0) {
+                msg = 'Asante kwa kutumia PICS. Wasiliana na Seperatus Kamuntu 0787416437 &amp; 07847406050 ili kuthibitisha au kuweka oda.';
+            }
+            this.send(msg, true);
             break;
 
             case '2':
-            this.send('Thank you for using PICS! Our assistant will call you shortly on this number!', true);
+            this.send('Asante kwa kutumia PICS. Tutakupigia ili kupokea maelezo.', true);
             break;
 
             case '3':
-            this.send('Thank you for using PICS!\n5,000 is the recommended retail price!', true);
+            this.send('Ujumbe: Asante kwa kutumia PICS.\nBei halali Sh 5,000 kwa wauzaji wa reja reja', true);
             break;
 
             default:
-            this.sendMenu(options, 'You have entered an invalid option!', options);
+            this.sendMenu(options, 'Chaguo lako sio sahihi!', options);
             break;
         }
     }

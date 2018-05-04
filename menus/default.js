@@ -2,9 +2,9 @@
 module.exports = {
     main(){
         let options = [
-            'New Vendor',
-            'Vendor',
-            'Consumer'
+            'Wauzaji Wapya',
+            'Wauzaji',
+            'Watumiaji Bidhaa'
         ];
 
         switch(this.input){
@@ -25,7 +25,7 @@ module.exports = {
             break;
 
             default:
-            this.sendMenu(options, 'You have entered an invalid option!');
+            this.sendMenu(options, 'Chaguo lako sio sahihi!');
             break;
         }
     }

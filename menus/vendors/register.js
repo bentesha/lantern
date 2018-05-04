@@ -1,6 +1,6 @@
 
 module.exports = {
     main(){
-        this.send('Sorry! You cannot register distributors at the moment!', true);
+        this.send('Samahani! Huwezi sajili wasambazaji kwa sasa!!', true);
     }
 }

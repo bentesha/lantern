@@ -2,31 +2,35 @@
 module.exports = {
     main(){
         let options = [
-            'Find retailer',
-            'Identify counterfeit',
-            'PICS recommended price'
+            'Tafuta Muuzaji',
+            'Tambua bidhaa bandia',
+            'Thibitisha bei halali ya PICS'
         ];
 
         if(this.input === null){
-            this.sendMenu(options, 'Welcome to PICS - ' + this.data.zone);
+            this.sendMenu(options, 'Karibu PICS - ' + this.data.zone);
             return;
         }
 
         switch(this.input){
             case '1':
-            this.send('Sorry! There are currently no retailers available in this zone! Please check us back soon!', true);
+            let msg = 'Samahani! Hakuna wauzaji walio sajliwa katika ukanda huu!';
+            if(this.data.zone === 0) {
+                msg = 'Asante kwa kutumia PICS.\nWasiliana na Seperatus Kamuntu 0787416437 au 07847406050 ili kuthibitisha au kuweka oda';
+            }
+            this.send(msg, true);
             break;
 
             case '2':
-            this.send('Two heavy inner liner (bottom double seals) with outer printed PICS and KINGA NJAA. Thank you for using PICS.', true);
+            this.send('Mfuko wa PICS una mistari miwili minene (iliyobanwa kwa chini mara mbili) iliyochapishwa neno PICS na KINGA NJAA kwa nje. Ahsante kwa kutumia PICS', true);
             break;
 
             case '3':
-            this.send('Thank you for using PICS!\n5,000 is the recommended retail price!', true);
+            this.send('Asante kwa kutumia PICS.\nBei halali ni Sh.5000 kwa uuzaji wa rejareja.', true);
             break;
 
             default:
-            this.sendMenu(options, 'You have entered an invalid option!', options);
+            this.sendMenu(options, 'Chaguo lako sio sahihi!', options);
             break;
         }
     }
