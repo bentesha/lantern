@@ -13,7 +13,7 @@ module.exports = {
             break;
 
             case '1':
-            this.forward('new-vendor');
+            this.forward('vendors/register');
             break;
 
             case '2':
