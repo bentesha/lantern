@@ -28,7 +28,7 @@ module.exports = {
 
   async create(attributes) {
     attributes = filterProperties(attributes, allowedProperties);
-    attributes.id = id();
+    attributes.id = require("../../utils/id")();
     const [id] = await db.into(table).insert(attributes);
     //Reset all hits to 0;
     await db.from(table).update({ hits: 0 });
