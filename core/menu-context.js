@@ -12,10 +12,10 @@ function MenuContext(){
 }
 
 //Load and execute a given menu
-MenuContext.prototype.execute = function (menuName) {
+MenuContext.prototype.execute = async function (menuName) {
     let menu = require('../menus/' + menuName);
     this.currentMenu = menuName;
-    menu.main.call(this);
+    await menu.main.call(this);
     return this._responseMessage;
 };
 
@@ -37,7 +37,7 @@ MenuContext.prototype.send = function(message, quitSession) {
     this.quit = quitSession;
 }
 
-MenuContext.prototype.forward = function(menuName){
+MenuContext.prototype.forward = async function(menuName){
     this.quit = false;
     this.input = null;
     return this.execute(menuName);

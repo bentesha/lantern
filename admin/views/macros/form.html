@@ -1,0 +1,35 @@
+{% macro input(name = "", value = "", placeholder = "", error = null, class = "", type="text") %}
+<input 
+  name="{{name}}"
+  type="{{type}}"
+  value="{{value}}"
+  class="form-control {{class}} {{'is-invalid' if error }}"
+  placeholder="{{placeholder}}">
+  {% if error %}
+  <div class="invalid-feedback">{{error}}</div>
+  {% endif %}
+{% endmacro %}
+
+{% macro label(title = "") %}
+  <label class="control-label">{{title}}</label>
+{% endmacro %}
+
+{% macro dropdown(name = "", value = "", options = [], placeholder = "", class = "", error = undefined) %}
+  <select
+    name="{{name}}"
+    class="form-control {{class}} {{'is-invalid' if error}}">
+    <option value="">{{placeholder}}</option>
+    {% for option in options %}
+      <option value="{{option.id}}" {{'selected' if option.id == value}}>{{option.name}}</option>
+    {% endfor %}
+  </select>
+  {% if error %}
+  <p class="invalid-feedback">{{error}}</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro delete(url) %}
+<form class="d-inline" action="{{url}}" method="POST">
+  <button onclick="if(!confirm('Are you sure you want to delete this item?')){ event.preventDefault(); }" class="badge badge-danger">Delete</button>
+</form>
+{% endmacro %}

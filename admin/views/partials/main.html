@@ -1,0 +1,21 @@
+{% extends "./layout.html" %}
+
+{% block head %}
+  {% block script %}
+  {% endblock %}
+{% endblock %}
+
+{% block body %}
+  <div class="content d-flex">
+    {% import './sidebar.html' as sidebar %}
+    {{sidebar.render(activeMenu)}}
+    <div class="main-content-wrap flex-grow-1">
+      <div class="main-content">
+        <div class="heading">
+          <h1 class="title">{{pageHeading | default('[No Name]')}}</h1>
+        </div>
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

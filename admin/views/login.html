@@ -1,0 +1,31 @@
+{% extends "./partials/layout.html" %}
+
+{% block body %}
+<div class="content d-flex justify-content-center align-items-center">
+  <div class="col-md-3 card">
+    <div class="card-body">
+      <form method="POST" action="/login">
+        <h3>Login</h3>
+        {% if error %}
+          <div class="alert alert-danger">
+            <span>{{error}}</span>
+          </div>
+        {% else %}
+          <p class="text-primary">Enter email address and password to login.</p>
+        {% endif %}
+        <div class="form-group">
+          <label for="email" class="control-label">Email</label>
+          <input name="email" value="{{email}}" type="text" class="form-control" placeholder="Email address">
+        </div>
+        <div class="form-group">
+          <label for="email" class="control-label">Password</label>
+          <input name="password" type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

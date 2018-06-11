@@ -1,0 +1,80 @@
+{% set pageHeading = "Edit User" %}
+{% set activeMenu = "Distributors" %}
+
+{% extends "../partials/main.html" %}
+
+{% import "../macros/form.html" as form %}
+
+{% block content %}
+<form action="/users/{{model.id}}" method="POST">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        {{ form.label("First Name") }}
+        {{ form.input(
+          name = "firstName",
+          value = model.firstName,
+          placeholder = "First name",
+          error = validations.firstName[0])
+        }}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        {{ form.label("Last Name") }}
+        {{ form.input(
+          name = "lastName",
+          value = model.lastName,
+          placeholder = "Last name",
+          error = validations.lastName[0])
+        }}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        {{ form.label("Email") }}
+        {{ form.input(
+          name = "email",
+          value = model.email,
+          placeholder = "Email address",
+          error = validations.email[0])
+        }}
+      </div>
+    </div>
+    <div class="col-md-12">
+    {% if model.id %}
+      <p class="text-info">
+        <small>Enter new password to change password, or leave blank</small>
+      </p>
+    {% endif %}
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        {{ form.label("Password") }}
+        {{ form.input(
+          name = "password",
+          value = model.password,
+          placeholder = "Password",
+          type = "password",
+          error = validations.password[0])
+        }}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        {{ form.label("Confirm Password") }}
+        {{ form.input(
+          name = "confirmPassword",
+          value = model.confirmPassword,
+          placeholder = "Repeat password",
+          type = "password",
+          error = validations.confirmPassword[0])
+        }}
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

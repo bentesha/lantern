@@ -1,0 +1,22 @@
+{% macro render(active = 'Dashboard') %}
+{% set items = [
+  {url: "/", title: "Dashboard"}, 
+  {url: "/zones", title: "Zones"},
+  {url: "/vendors", title: "Vendors"},
+  {url: "/users", title: "Users"},
+  {url: "/export", title: "Export"}
+] %}
+<div class="sidebar">
+  <section>
+    <h5 class="title">Menu</h5>
+    <ul class="list-group-transparent">
+      {% for item in items %}
+      <li class="list-group-item {{'active' if item.title == active}}"><a href="{{item.url}}">{{item.title}}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  <div class="m-4 mt-5">
+    <a href="/logout" class="btn btn-primary btn-block btn-lsg">Sign out</a>
+  </div>
+</div>
+{% endmacro %}

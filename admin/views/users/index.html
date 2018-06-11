@@ -1,0 +1,39 @@
+{% set pageHeading = "Users" %}
+{% set activeMenu = "Users" %}
+
+{% extends "../partials/main.html" %}
+
+{% import "../macros/form.html" as form %}
+{% import "../macros/alert.html" as alert %}
+
+{% block content %}
+<div class="action-row">
+  <a href="/users/new" class="btn btn-primary">New User</a>
+</div>
+{{ alert.flash(flash) }}
+<table class="table table-striped">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th style="width: 12%;"></th>
+  </thead>
+  <tbody>
+    {% for user in model %}
+    <tr>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{'Admin' if user.isAdmin else 'User'}}</td>
+      <td>
+        <a href="/users/{{user.id}}" class="badge badge-success">Edit</a>
+        {% if not user.isSystemAccount %}
+        {{ form.delete("/users/delete/" + user.id)}}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% macro flash(messages) %}
+{% if messages.danger %}
+  {% for message in messages.danger %}
+  <div class="alert alert-danger">
+    <span>{{messages.danger}}</span>
+  </div>
+  {% endfor %}
+{% endif %}
+{% endmacro %}

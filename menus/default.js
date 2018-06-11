@@ -1,32 +1,28 @@
+const analytics = require("../admin/data/analytics");
 
 module.exports = {
-    main(){
-        let options = [
-            'Wauzaji Wapya',
-            'Wauzaji',
-            'Watumiaji Bidhaa'
-        ];
+  async main() {
+    let options = ["Tafuta Wauzaji", "Taarifa za PICS"];
 
-        switch(this.input){
-            case null:
-            this.sendMenu(options);
-            break;
+    switch (this.input) {
+      case null:
+        this.sendMenu(options);
+        break;
 
-            case '1':
-            this.forward('vendors/register');
-            break;
+      case "1":
+        await analytics.logVendorsSelection(this.sessionId);
+        return this.forward("vendors");
+        break;
 
-            case '2':
-            this.forward('distributors/zones/select');
-            break;
+      case "2":
+        await analytics.logInfoSelection(this.sessionId);
+        return this.forward("pics-info");
+        break;
 
-            case '3':
-            this.forward('consumers/zones/select');
-            break;
-
-            default:
-            this.sendMenu(options, 'Chaguo lako sio sahihi!');
-            break;
-        }
+      default:
+        await analytics.logInvalidLevel1Option(this.sessionId);
+        this.sendMenu(options, "Chaguo lako sio sahihi!");
+        break;
     }
-}
+  }
+};

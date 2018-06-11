@@ -1,0 +1,35 @@
+{% set pageHeading = "Vendors" %}
+{% set activeMenu = "Vendors" %}
+
+{% extends "../partials/main.html" %}
+
+{% import "../macros/form.html" as form %}
+
+{% block content %}
+<div class="action-row">
+  <a href="/vendors/new" class="btn btn-primary">New Vendor</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone</th>
+    <th>Zone</th>
+    <th style="width: 12%;"></th>
+  </thead>
+  <tbody>
+    {% for dist in model %}
+    <tr>
+      <td>{{dist.firstName}}</td>
+      <td>{{dist.lastName}}</td>
+      <td>{{dist.phone}}</td>
+      <td>{{dist.zone.name}}</td>
+      <td>
+        <a href="/vendors/{{dist.id}}" class="badge badge-success">Edit</a>
+        {{ form.delete("/vendors/delete/" + dist.id) }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
