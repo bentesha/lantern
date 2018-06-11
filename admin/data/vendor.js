@@ -15,13 +15,16 @@ const allowedProperties = [
 
 module.exports = {
   getAll() {
-    return db.from(table).select();
+    return db
+      .from(table)
+      .where({ isArchieved: false })
+      .select();
   },
 
   getById(id) {
     return db
       .from(table)
-      .where({ id })
+      .where({ id, isArchieved: false })
       .select()
       .first();
   },
@@ -51,6 +54,6 @@ module.exports = {
     return db
       .from(table)
       .where({ id })
-      .delete();
+      .update({ isArchieved: true });
   }
 };

@@ -14,13 +14,16 @@ const allowedProperties = [
 
 module.exports = {
   getAll() {
-    return db.from(table).select();
+    return db
+      .from(table)
+      .where({ isArchived: false })
+      .select();
   },
 
   getById(id) {
     return db
       .from(table)
-      .where({ id })
+      .where({ id, isArchived: false })
       .select()
       .first();
   },
@@ -28,7 +31,7 @@ module.exports = {
   getByEmail(email) {
     return db
       .from(table)
-      .where({ email })
+      .where({ email, isArchived: false })
       .select()
       .first();
   },
@@ -55,7 +58,7 @@ module.exports = {
       .where({ id })
       .select()
       .first();
-    if(user && user.isSystemAccount){
+    if (user && user.isSystemAccount) {
       //Prevent changing isAdmin and isActive
       //statuses
       delete attributes.isAdmin;
@@ -71,6 +74,6 @@ module.exports = {
     return db
       .from(table)
       .where({ id })
-      .delete();
+      .update({ isArchived: true });
   }
 };
