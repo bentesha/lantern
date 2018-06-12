@@ -62,9 +62,10 @@ module.exports = express
   })
   .get("/requests-by-feature", async (request, response) => {
     const features = {
-      COUNTERFEIT_INFO: "Couterfeit",
+      COUNTERFEIT_INFO: "Couterfeit Info",
       PRICE_INFO: "Price Info",
-      ZONE: "Vendor"
+      ZONE: "Vendor Search",
+      null: "Incomplete Sessions"
     };
 
     const result = await db.from(sessionTable)
