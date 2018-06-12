@@ -17,14 +17,14 @@ module.exports = {
   getAll() {
     return db
       .from(table)
-      .where({ isArchieved: false })
+      .where({ isArchived: false })
       .select();
   },
 
   getById(id) {
     return db
       .from(table)
-      .where({ id, isArchieved: false })
+      .where({ id, isArchived: false })
       .select()
       .first();
   },
@@ -54,6 +54,6 @@ module.exports = {
     return db
       .from(table)
       .where({ id })
-      .update({ isArchieved: true });
+      .update({ isArchived: true });
   }
 };
