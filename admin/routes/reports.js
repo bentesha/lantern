@@ -65,7 +65,8 @@ module.exports = express
       COUNTERFEIT_INFO: "Couterfeit Info",
       PRICE_INFO: "Price Info",
       ZONE: "Vendor Search",
-      null: "Incomplete Sessions"
+      null: "Incomplete Sessions",
+      INVALID_OPTION: "Invalid Options"
     };
 
     const result = await db.from(sessionTable)
