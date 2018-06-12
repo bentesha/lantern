@@ -51,24 +51,6 @@ window.onload = function() {
     this.console.log("could not render chart: requests-per-zone");
   });
 
-  axios.get("/reports/requests-by-vendor").then(({data}) => {
-    const tbody = document.getElementById("requests-by-vendor").children[1];
-    tbody.innerHTML = "";
-    data.map(item => {
-      const row = document.createElement("tr");
-      row.appendChild(document.createElement("td")).innerText = item.name;
-      row.appendChild(document.createElement("td")).innerText = item.zone;
-      row.appendChild(document.createElement("td")).innerText = item.requests;
-      row.lastElementChild.className = "text-right";
-      
-      return row;
-    })
-    .forEach(row => tbody.appendChild(row));
-
-  }).catch(error => {
-    console.error("Could not render table: " + error);
-  });
-
   axios.get("/reports/requests-by-feature").then(({data}) => {
     drawPieChart("requests-by-feature", data.labels, data.data);
   }).catch(error => {
