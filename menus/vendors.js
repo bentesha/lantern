@@ -20,7 +20,7 @@ module.exports = {
         const zone = data.zones[option - 1];
         const vendors = await db
           .from("vendor")
-          .where({ zoneId: zone.id })
+          .where({ zoneId: zone.id, isArchived: false })
           .orderBy("hits", "asc")
           .select()
           .limit(count);
