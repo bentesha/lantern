@@ -5,21 +5,21 @@ const gulp = require("gulp");
 
 gulp.task("sass", function() {
   return gulp
-    .src("admin/styles/*.scss")
+    .src("styles/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(rename("style.css"))
-    .pipe(gulp.dest("admin/public/css"));
+    .pipe(gulp.dest("public/css"));
 });
 
 gulp.task("js", function() {
   return gulp
-    .src("admin/scripts/**/*.js")
-    .pipe(gulp.dest("admin/public/js"));
+    .src("scripts/**/*.js")
+    .pipe(gulp.dest("public/js"));
 });
 
 gulp.task("watch", function(){
-  gulp.watch("admin/scripts/**/*.js", ["js"]);
-  gulp.watch("admin/styles/**/*.scss", ["sass"]);
+  gulp.watch("scripts/**/*.js", ["js"]);
+  gulp.watch("styles/**/*.scss", ["sass"]);
 })
 
 gulp.task("default", ["sass", "js", "watch"]);
