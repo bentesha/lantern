@@ -10,7 +10,6 @@ const allowedProperties = [
   "level",
   "category",
   "subject",
-  "grade",
   "description",
   "coverImage",
   "attachment"
@@ -22,6 +21,7 @@ function Book() {
   this.filterProperties = require("../utils/filterProperties");
   this.authorStore = require("./author");
   this.publisherStore = require("./publisher");
+  this.gradeStore = require("./grade");
 }
 
 Book.prototype.create = async function(attributes) {
@@ -46,7 +46,10 @@ Book.prototype.update = async function(id, attributes) {
 
 Book.prototype.setAuthors = async function(id, authors) {
   //Delete all existing authors
-  await this.db.from("book_author").where({ bookId: id }).delete();
+  await this.db
+    .from("book_author")
+    .where({ bookId: id })
+    .delete();
   const promises = authors.map(async author => {
     if (!author.id) {
       let result = await this.authorStore.getByName(author.name);
@@ -65,6 +68,28 @@ Book.prototype.setAuthors = async function(id, authors) {
   return Promise.all(promises);
 };
 
+Book.prototype.setGrades = async function(id, grades) {
+  //Delete existing grades associated with the book
+  await this.db
+    .from("book_grade")
+    .where({ bookId: id })
+    .delete();
+  const promises = grades.map(async grade => {
+    grade = typeof grade === "string" ? { name: grade } : grade;
+    if (!grade.id) {
+      grade =
+        (await this.gradeStore.getByName(grade.name)) ||
+        (await this.gradeStore.create({ name: grade.name }));
+    }
+    await this.db.into("book_grade").insert({
+      bookId: id,
+      gradeId: grade.id
+    });
+    return grade;
+  });
+  return Promise.all(promises);
+};
+
 Book.prototype.getById = async function(id) {
   const book = await this.db
     .from(table)
@@ -75,6 +100,7 @@ Book.prototype.getById = async function(id) {
   book.coverImage = JSON.parse(book.coverImage);
   book.publisher = await this.publisherStore.getById(book.publisherId);
   book.authors = await this.getAuthors(id);
+  book.grades = await this.getGrades(id);
   return book;
 };
 
@@ -92,6 +118,14 @@ Book.prototype.getAuthors = function(bookId) {
     .select("author.*");
 };
 
+Book.prototype.getGrades = function(bookId) {
+  return this.db
+    .from("book_grade")
+    .innerJoin("grade", "gradeId", "grade.id")
+    .where({ bookId })
+    .select("grade.*");
+};
+
 Book.prototype.delete = function(id) {
   return this.db
     .from(table)
@@ -106,23 +140,19 @@ Book.prototype.getOptions = async function() {
     .from(table)
     .distinct("level")
     .select()
-    .map((item => item.level));
-  const grades = await this.db
-    .from(table)
-    .distinct("grade")
-    .select()
-    .map((item => item.grade));
+    .map(item => item.level);
   const categories = await this.db
     .from(table)
     .distinct("category")
     .select()
-    .map((item => item.category));
+    .map(item => item.category);
   const subjects = await this.db
     .from(table)
     .distinct("subject")
     .select()
-    .map((item => item.subject));
-  
+    .map(item => item.subject);
+  const grades = await this.gradeStore.getAll();
+
   return {
     publishers,
     authors,
@@ -130,7 +160,7 @@ Book.prototype.getOptions = async function() {
     levels,
     categories,
     grades
-  }
+  };
 };
 
 module.exports = new Book();

@@ -38,7 +38,7 @@ module.exports = function(book){
     level: {
       presence: { allowEmpty: false }
     },
-    grade: {
+    grades: {
       presence: { allowEmpty: false }
     }
   };

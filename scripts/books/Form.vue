@@ -39,7 +39,7 @@
             <drop-down v-model="book.level" :error="errors.level" label="Level" :options="options.levels"></drop-down>
           </div>
           <div class="col-md-6">
-            <drop-down v-model="book.grade" :error="errors.grade" label="Grade" :options="options.grades"></drop-down>
+            <drop-down v-model="book.grades" caption="name" multiple label="Grades" :error="errors.grades" :options="options.grades"></drop-down>
           </div>
           <div class="col-md-12">
             <text-area v-model="book.description" :error="errors.description" label="Description"></text-area>

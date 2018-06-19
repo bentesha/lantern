@@ -2,6 +2,7 @@ const express = require("express");
 const validate = require("../validations/book");
 const publisherStore = require("../data/publisher");
 const bookStore = require("../data/book");
+const gradeStore = require("../data/grade");
 
 module.exports = express
   .Router()
@@ -62,7 +63,9 @@ module.exports = express
         return typeof author === "string" ? { name: author } : author;
       });
       const authors = await bookStore.setAuthors(result.id, book.authors);
+      const grades = await bookStore.setGrades(result.id, book.grades);
       result.authors = authors;
+      result.grades = grades;
       response.json(result);
     } catch (error) {
       console.log(error);
