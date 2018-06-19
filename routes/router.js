@@ -8,7 +8,7 @@ const books = require("./books");
 module.exports = function(app){
   app.use("/", auth);
   //All routes from here requires a used logged in
-  //app.use(requireAuth);
+  app.use(requireAuth);
   app.use("/", dashboard);
   app.use("/users", users);
   app.use("/books", books);
