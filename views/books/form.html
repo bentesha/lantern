@@ -1,0 +1,14 @@
+{% set pageHeading = "Edit Book" %}
+{% set activeMenu = "Books" %}
+
+{% extends "../partials/main.html" %}
+
+{% import "../macros/form.html" as form %}
+
+{% block content %}
+<div id="app"></div>
+<script>
+  window.formData =  {{data | safe}}
+</script>
+<script src="/js/main.js"></script>
+{% endblock %}

@@ -16,6 +16,7 @@ app.set("view engine", config.templates.extension);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
     secret: config.session.secret,

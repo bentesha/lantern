@@ -1,0 +1,37 @@
+{% set pageHeading = "Books" %}
+{% set activeMenu = "Books" %}
+
+{% extends "../partials/main.html" %}
+
+{% import "../macros/form.html" as form %}
+{% import "../macros/alert.html" as alert %}
+
+{% block content %}
+<div class="action-row">
+  <a href="/books/new" class="btn btn-primary">New Book</a>
+</div>
+{{ alert.flash(flash) }}
+<table class="table table-striped table-md">
+  <thead>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Publisher</th>
+    <th>Authors</th>
+    <th style="width: 12%;"></th>
+  </thead>
+  <tbody>
+    {% for book in model %}
+    <tr>
+      <td>{{book.isbn}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.publisher.name}}</td>
+      <td>{{book.authors.length}}</td>
+      <td>
+        <a href="/books/{{book.id}}" class="badge badge-success">Edit</a>
+        {{ form.delete("/books/delete/" + book.id)}}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
