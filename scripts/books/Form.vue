@@ -38,7 +38,13 @@
           <div class="col-md-6">
             <drop-down v-model="book.level" :error="errors.level" label="Level" :options="options.levels"></drop-down>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
+            <input-text :error="errors.edition" v-model="book.edition" label="Edition" placeholder="Edition"></input-text>
+          </div>
+          <div class="col-md-3">
+            <input-text :error="errors.year" v-model="book.year" label="Year" placeholder="Year"></input-text>
+          </div>
+          <div class="col-md-12">
             <drop-down v-model="book.grades" caption="name" multiple label="Grades" :error="errors.grades" :options="options.grades"></drop-down>
           </div>
           <div class="col-md-12">

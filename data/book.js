@@ -10,6 +10,8 @@ const allowedProperties = [
   "level",
   "category",
   "subject",
+  "edition",
+  "year",
   "description",
   "coverImage",
   "attachment"

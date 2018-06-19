@@ -1,4 +1,5 @@
 const validate = require("validate.js");
+const moment = require("moment");
 
 module.exports = function(book){
   const rules = {
@@ -40,6 +41,16 @@ module.exports = function(book){
     },
     grades: {
       presence: { allowEmpty: false }
+    },
+    edition: {
+      presence: { allowEmpty: false }
+    },
+    year: {
+      presence: { allowEmpty: false },
+      numericality: {
+        greaterThan: 2006,
+        lessThanOrEqualTo: moment().year()
+      }
     }
   };
 
