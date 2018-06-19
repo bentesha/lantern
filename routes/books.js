@@ -42,6 +42,9 @@ module.exports = express
         return;
       }
       const book = request.body;
+      if(typeof book.publisher === "string"){
+        book.publisher = { name: book.publisher };
+      }
       if (!book.publisher.id) {
         const publisher =
           (await publisherStore.getByName(book.publisher.name)) ||
@@ -55,6 +58,9 @@ module.exports = express
       const result = book.id
         ? await bookStore.update(book.id, book)
         : await bookStore.create(book);
+      book.authors = book.authors.map(author => {
+        return typeof author === "string" ? { name: author } : author;
+      });
       const authors = await bookStore.setAuthors(result.id, book.authors);
       result.authors = authors;
       response.json(result);
