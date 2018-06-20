@@ -53,6 +53,8 @@ module.exports = express
             name: book.publisher.name
           }));
         book.publisherId = publisher.id;
+      } else {
+        book.publisherId = book.publisher.id;
       }
       book.attachment = JSON.stringify(book.attachment);
       book.coverImage = JSON.stringify(book.coverImage);
