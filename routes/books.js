@@ -6,10 +6,24 @@ const gradeStore = require("../data/grade");
 
 module.exports = express
   .Router()
-  .get("/", async (request, response) => {
+  .get("/", async ({ query }, response) => {
     try {
-      const model = await bookStore.getAll();
-      response.render("books/index", { model });
+      const pageSize = 15; //Rows per page
+      const page = parseInt(query.page) || 1;
+      const options = {
+        limit: pageSize,
+        offset: pageSize * (page - 1)
+      };
+      const model = await bookStore.getAll(options);
+      const total = await bookStore.count();
+      const pages = Math.ceil(total / pageSize);
+
+      const pagination = {
+        page, 
+        pages: Array(pages).fill().map((item, index) => index + 1),
+        total
+      };
+      response.render("books/index", { model, pagination });
     } catch (error) {
       console.log(error);
       response.sendStatus(500);
@@ -43,7 +57,7 @@ module.exports = express
         return;
       }
       const book = request.body;
-      if(typeof book.publisher === "string"){
+      if (typeof book.publisher === "string") {
         book.publisher = { name: book.publisher };
       }
       if (!book.publisher.id) {

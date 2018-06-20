@@ -34,4 +34,14 @@
     {% endfor %}
   </tbody>
 </table>
+<div class="mb-4">
+  <small class="d-inline-block mr-3 text-primary"><strong>Total: {{pagination.total}}</strong></small>
+  {% for page in pagination.pages %}
+  <a 
+    href="/books?page={{page}}"
+    class="btn btn-sm {{'btn-link' if pagination.page != page else 'btn-outline-primary'}}">
+    {{page}}
+  </a>
+  {% endfor %}
+</div>
 {% endblock %}

@@ -106,11 +106,25 @@ Book.prototype.getById = async function(id) {
   return book;
 };
 
-Book.prototype.getAll = async function() {
-  const books = await this.db.from(table).select();
+Book.prototype.getAll = async function(options = {}) {
+  options = options || {};
+  const query = this.db.from(table);
+  options.limit = parseInt(options.limit);
+  options.offset = parseInt(options.offset);
+  if(options.limit){
+    query.limit(options.limit);
+  }
+  if(options.offset){
+    query.offset(options.offset);
+  }
+  const books = await query.select();
   const promises = books.map(item => this.getById(item.id));
   return Promise.all(promises);
 };
+
+Book.prototype.count = async function(){
+  return (await this.db.from(table).count({total: "id"}).first()).total;
+}
 
 Book.prototype.getAuthors = function(bookId) {
   return this.db
