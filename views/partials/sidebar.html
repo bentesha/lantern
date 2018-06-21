@@ -1,10 +1,18 @@
-{% macro render(active = 'Dashboard') %}
+{% macro render(active = 'Dashboard', session = {}) %}
 {% set items = [
   {url: "/", title: "Dashboard"},
   {url: "/books", title: "Books"},
   {url: "/users", title: "Users"}
 ] %}
 <div class="sidebar">
+  <div class="m-4">
+    <div class="card" style="background: #ffffff3b;">
+      <div class="p-3 text-center">
+        <small class="text-info">Hello! Welcome</small><br>
+        <span>{{session.user.firstName}} {{session.user.lastName}}</span>
+      </div>
+    </div>
+  </div>
   <section>
     <h5 class="title">Menu</h5>
     <ul class="list-group-transparent">
