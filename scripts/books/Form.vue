@@ -30,6 +30,12 @@
             <input-text v-model="book.price" :error="errors.price" label="Price"></input-text>
           </div>
           <div class="col-md-6">
+            <drop-down v-model="book.contentType" :error="errors.contentType" label="Content Type" :options="options.contentTypes"></drop-down>
+          </div>
+          <div class="col-md-6">
+            <drop-down v-model="book.minLeasePeriod" :error="errors.minLeasePeriod" label="Min. Lease Period" :options="leasePeriods"></drop-down>
+          </div>
+          <div class="col-md-6">
             <drop-down v-model="book.subject" :error="errors.subject" label="Subject" :options="options.subjects"></drop-down>
           </div>
           <div class="col-md-6">
@@ -84,6 +90,7 @@ export default {
     const data = {
       options: {},
       errors: {},
+      leasePeriods: ["1 Week", "1 Month", "3 Months", "6 Months", "1 Year"],
       languages: ["English", "Swahili", "French"],
       file: null
     };

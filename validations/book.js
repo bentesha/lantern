@@ -18,6 +18,8 @@ module.exports = function(book){
     isbn: {
       presence: { allowEmpty: false }
     },
+    minLeasePeriod: { allowEmpty: false },
+    contentType: { allowEmpty: false },
     pages: {
       presence: { allowEmpty: false },
       numericality: {

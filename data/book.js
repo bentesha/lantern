@@ -9,6 +9,8 @@ const allowedProperties = [
   "language",
   "level",
   "category",
+  "contentType",
+  "minLeasePeriod",
   "subject",
   "edition",
   "year",
@@ -162,6 +164,11 @@ Book.prototype.getOptions = async function() {
     .distinct("category")
     .select()
     .map(item => item.category);
+  const contentTypes = await this.db
+    .from(table)
+    .distinct("contentType")
+    .select()
+    .map(item => item.contentType);
   const subjects = await this.db
     .from(table)
     .distinct("subject")
@@ -175,7 +182,8 @@ Book.prototype.getOptions = async function() {
     subjects,
     levels,
     categories,
-    grades
+    grades,
+    contentTypes
   };
 };
 
