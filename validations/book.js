@@ -1,7 +1,7 @@
 const validate = require("validate.js");
 const moment = require("moment");
 
-module.exports = function(book){
+module.exports = function(book) {
   const rules = {
     title: {
       presence: { allowEmpty: false }
@@ -18,8 +18,16 @@ module.exports = function(book){
     isbn: {
       presence: { allowEmpty: false }
     },
-    minLeasePeriod: { allowEmpty: false },
-    contentType: { allowEmpty: false },
+    minLeasePeriod: {
+      presence: {
+        allowEmpty: false
+      }
+    },
+    contentType: {
+      presence: {
+        allowEmpty: false
+      }
+    },
     pages: {
       presence: { allowEmpty: false },
       numericality: {
@@ -57,8 +65,11 @@ module.exports = function(book){
   };
 
   const errors = validate(book, rules);
-  return errors && Object.keys(errors).reduce((obj, key) => {
-    obj[key] = errors[key].length ? errors[key][0] : undefined;
-    return obj;
-  }, {});
-}
+  return (
+    errors &&
+    Object.keys(errors).reduce((obj, key) => {
+      obj[key] = errors[key].length ? errors[key][0] : undefined;
+      return obj;
+    }, {})
+  );
+};
