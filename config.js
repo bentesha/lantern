@@ -11,5 +11,6 @@ module.exports = {
   urls: {
     login: "/login",
     home: "/"
-  }
+  },
+  db: 'development'
 };
